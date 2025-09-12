@@ -56,3 +56,20 @@ header {
   padding: 8px 10px;
   border-radius: 999px;
 }
+
+/* Footer */
+footer {
+  background: black;
+}
+
+.footer-container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.footer-note {
+  margin: 0 0 16px;
+  color: lightgray;
+  font-size: 13px;
+}
