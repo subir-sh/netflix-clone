@@ -1,5 +1,11 @@
-body { background: black; }
-.page { width: 1200px; margin: 0 auto; }
+:root {
+    --bg: black;
+    --text: white;
+    --text-muted: lightgray;
+    --page-width: 1200px;
+}
+body { background: var(--bg); }
+.page { width: var(--page-width); margin: 0 auto; }
 
 /* Header */
 header {
@@ -7,12 +13,12 @@ header {
   top: 0;
   z-index: 10;
   height: 72px;
-  background: black;
-  color: white;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .header-container {
-  width: 1200px;
+  width: var(--page-width);
   margin: 0 auto;
   height: 100%;
   display: flex;
@@ -24,11 +30,11 @@ header {
 
 .header-nav { display: flex; gap: 16px; }
 .header-nav a {
-  color: lightgray;
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 14px;
 }
-.header-nav a:hover { color: white; }
+.header-nav a:hover { color: var(--text); }
 
 .actions {
   margin-left: auto;
@@ -41,26 +47,26 @@ header {
   border-radius: 999px;
   border: 1px solid gray;
   background: transparent;
-  color: white;
+  color: var(--text);
   cursor: not-allowed; 
 }
 .actions a {
-  color: white;
+  color: var(--text);
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 999px;
 }
 
 /* Footer */
-footer { background: black; }
+footer { background: var(--bg); }
 .footer-container {
-  width: 1200px;
+  width: var(--page-width);
   margin: 0 auto;
   padding: 40px 0;
 }
 .footer-note {
   margin: 0 0 16px;
-  color: lightgray;
+  color: var(--text-muted);
   font-size: 13px;
 }
 
@@ -75,9 +81,9 @@ footer { background: black; }
   background-position: 20% center;
   background-repeat: no-repeat;
 }
-.hero-container { width: 1200px; margin: 0 auto; padding: 180px 0; }
+.hero-container { width: var(--page-width); margin: 0 auto; padding: 180px 0; }
 .hero h1 { margin: 0 0 12px; font-size: 40px; }
-.hero p { margin: 0; color: lightgray; font-size: 16px; max-width: 560px; }
+.hero p { margin: 0; color: var(--text-muted); font-size: 16px; max-width: 560px; }
 .hero-buttons { margin-top: 20px; display: flex; gap: 12px; }
 
 .play-btn {
@@ -96,7 +102,7 @@ footer { background: black; }
 }
 
 /* Main */
-.row { padding: 40px 0 24px; background: black; color: white; }
+.row { padding: 40px 0 24px; background: var(--bg); color: var(--text); }
 .row h2 { margin: 0 0 16px; font-size: 20px; }
 
 .card-container {
@@ -106,10 +112,11 @@ footer { background: black; }
   list-style: none;
   margin: 0;
   padding: 0;
-  background: black;
+  background: var(--bg);
 }
 
 .card { aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; transition: transform .15s ease; }
 .card:hover { transform: scale(1.05); }
+.card:focus-within { transform: scale(1.05); }
 .card a { display: block; width: 100%; height: 100%; }
 .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
