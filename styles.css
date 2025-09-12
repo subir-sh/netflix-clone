@@ -73,3 +73,54 @@ footer {
   color: lightgray;
   font-size: 13px;
 }
+
+/* Hero */
+.hero {
+  height: 520px;
+  color: white;
+  background-image: 
+    linear-gradient(0deg, rgba(0,0,0,.5), rgba(0,0,0,.5)),
+    url("images/hero.jpg");
+  background-size: cover;
+  background-position: 20% center;
+  background-repeat: no-repeat;
+}
+
+.hero-container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 180px 0;
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: 40px;
+}
+
+.hero p {
+  margin: 0;
+  color: lightgray;
+  font-size: 16px;
+  max-width: 560px;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.play-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: white;
+  color: black;
+  text-decoration: none;
+}
+.info-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background: gray;
+  color: white;
+  text-decoration: none;
+}
