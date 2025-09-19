@@ -1,21 +1,4 @@
-// 모달
-const modalContent = {
-    notif: `
-    <ul>
-      <li><a href="#">새로운 에피소드 등장</a></li>
-      <li><a href="#">내가 찜한 콘텐츠 업데이트</a></li>
-      <li><a href="#">오늘 저녁 8시 공개 예정</a></li>
-    </ul>
-  `,
-    profile: `
-    <ul>
-      <li><a href="#">계정</a></li>
-      <li><a href="#">설정</a></li>
-      <li><a href="#">고객 센터</a></li>
-      <li><a href="#">로그아웃</a></li>
-    </ul>
-  `,
-};
+import { categoryContent, modalContent } from './data.js';
 
 // 헤더 모달 렌더링 및 이벤트 바인딩
 function renderHeaderModal() {
@@ -64,59 +47,53 @@ function renderHeaderModal() {
     modal.addEventListener('mouseleave', setHideTimer);
 }
 
-// 카테고리 데이터 생성: 각 15개, 홀수=sample.png, 짝수=sample2.png
-function makeCategory(name, count) {
-    const cat = [];
-    for (let i = 1; i <= count; i++) {
-        cat.push({
-            id: `${name}${i}`,
-            title: `작품 ${name}${i}`,
-            img: i % 2 === 1 ? 'images/sample.png' : 'images/sample2.png',
-            alt: `작품 ${name}${i} 포스터`,
-        });
-    }
-    cat[0].img = 'images/first.png'; // 캐러셀 동작 여부 판명을 위해 첫 요소는 특별히
-    return cat;
-}
+// 아예 카테고리 섹션 html 자체를 동적으로 생성
+function renderCategoryRow(key, category) {
+    const section = document.createElement('section');
+    section.className = 'row';
+    section.dataset.key = key;
+    section.style.setProperty('--cols', category.visible);
 
-const categories = {
-    action: makeCategory('action', 20),
-    animation: makeCategory('animation', 40),
-    thriller: makeCategory('thriller', 35),
-};
+    section.innerHTML = `
+    <div class="row__header">
+      <h2>${category.title}</h2>
+      <div class="page-indicator"></div>
+    </div>
+    <div class="carousel">
+      <button class="carousel__nav prev">〈</button>
+      <div class="carousel__viewport">
+        <ul class="card-container">
+          ${category.items.map(({ id, title, img, alt }) => `
+            <li class="card" data-id="${id}">
+              <a href="#">
+                <img src="${img}" alt="${alt}">
+              </a>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+      <button class="carousel__nav next">〉</button>
+    </div>
+  `;
 
-function renderCategoryRow(rowEl, items) {
-    const ul = rowEl.querySelector('.card-container');
-    if (!ul) return;
+    // 페이지 인디케이터 
+    const indicator = section.querySelector('.page-indicator');
+    const totalPages = Math.ceil(category.items.length / category.visible);
+    indicator.innerHTML = Array.from({ length: totalPages }, (_, i) =>
+        `<div class="dot${i === 0 ? ' active' : ''}"></div>`
+    ).join('');
 
-    // data-visible -> 보여지는 카드의 수(기본 6), css 변수(--cols)에 반영
-    const visible = Number(rowEl.dataset.visible) || 6;
-    rowEl.style.setProperty('--cols', visible);
-
-    // html의 card-container ul에 li(작품 카드)들을 동적으로 추가
-    ul.innerHTML = items.map(({ id, title, img, alt }) => `
-    <li class="card" data-id="${id}">
-      <a href="#" aria-label="${title}">
-        <img src="${img}" alt="${alt || title}">
-      </a>
-    </li>
-  `).join('');
-
-    // 페이지 인디케이터 렌더링
-    const indicator = rowEl.querySelector('.page-indicator');
-    if (indicator) {
-        const totalPages = Math.ceil(items.length / visible);
-        indicator.innerHTML = Array.from({ length: totalPages }, (_, i) => `
-      <span class="dot${i === 0 ? ' active' : ''}" data-page="${i}"></span>
-    `).join('');
-    }
+    return section;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 각 카테고리 row에 데이터 렌더링
-    document.querySelectorAll('.row[data-key]').forEach(row => {
-        const key = row.getAttribute('data-key');
-        renderCategoryRow(row, categories[key] || []);
+    const main = document.querySelector('main.page');
+
+    // categoryContent 전체를 순회하면서 row 생성
+    Object.entries(categoryContent).forEach(([key, category]) => {
+        const section = renderCategoryRow(key, category);
+        main.appendChild(section);
     });
+
     renderHeaderModal();
 });
