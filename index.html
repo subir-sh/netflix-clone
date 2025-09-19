@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>넷플릭스 클론</title>
     <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="./app.js"></script>
 </head>
 
 <body>
@@ -33,47 +34,26 @@
             <h1>히어로 타이틀</h1>
             <p>설명 텍스트 공간. 몇 줄 정도 짧은 소개가 들어갈 수 있음.</p>
             <div class="hero-buttons">
-                <a href="#" class="play-btn">재생</a>
-                <a href="#" class="info-btn">상세 정보</a>
+                <a href="#" class="play-btn">▶ 재생</a>
+                <a href="#" class="info-btn">ⓘ 상세 정보</a>
             </div>
         </div>
     </section>
 
     <main class="page">
-        <section class="row">
-            <h2>카테고리 1</h2>
-            <ul class="card-container">
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-            </ul>
+        <section class="row" data-key="action" data-visible="6">
+            <h2>액션</h2>
+            <ul class="card-container"></ul>
         </section>
 
-        <section class="row">
-            <h2>카테고리 2</h2>
-            <ul class="card-container">
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-            </ul>
+        <section class="row" data-key="animation" data-visible="7">
+            <h2>애니메이션</h2>
+            <ul class="card-container"></ul>
         </section>
 
-        <section class="row">
-            <h2>카테고리 3</h2>
-            <ul class="card-container">
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-                <li class="card"><a href="#"><img src="images/sample.png" alt="작품 포스터"></a></li>
-            </ul>
+        <section class="row" data-key="thriller" data-visible="5">
+            <h2>스릴러</h2>
+            <ul class="card-container"></ul>
         </section>
     </main>
 
