@@ -13,7 +13,7 @@ function renderHeaderModal() {
 
         // 버튼 바로 아래에 위치시키기 (오른쪽 정렬)
         const rect = btn.getBoundingClientRect();
-        modal.style.top = rect.bottom + window.scrollY + 'px';
+        modal.style.top = rect.bottom + 'px';
         modal.style.left = (rect.right - modal.offsetWidth) + window.scrollX + 'px';
     }
 
