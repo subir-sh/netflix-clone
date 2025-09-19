@@ -81,19 +81,19 @@ function makeCategory(name, count) {
 
 const categories = {
     action: makeCategory('action', 20),
-    animation: makeCategory('animation', 20),
-    thriller: makeCategory('thriller', 20),
+    animation: makeCategory('animation', 40),
+    thriller: makeCategory('thriller', 35),
 };
 
-// html의 card-container ul에 li(작품 카드)들을 동적으로 추가
 function renderCategoryRow(rowEl, items) {
     const ul = rowEl.querySelector('.card-container');
     if (!ul) return;
 
-    // data-visible -> css 변수(--cols)에 반영, 기본 6
+    // data-visible -> 보여지는 카드의 수(기본 6), css 변수(--cols)에 반영
     const visible = Number(rowEl.dataset.visible) || 6;
     rowEl.style.setProperty('--cols', visible);
 
+    // html의 card-container ul에 li(작품 카드)들을 동적으로 추가
     ul.innerHTML = items.map(({ id, title, img, alt }) => `
     <li class="card" data-id="${id}">
       <a href="#" aria-label="${title}">
@@ -101,6 +101,15 @@ function renderCategoryRow(rowEl, items) {
       </a>
     </li>
   `).join('');
+
+    // 페이지 인디케이터 렌더링
+    const indicator = rowEl.querySelector('.page-indicator');
+    if (indicator) {
+        const totalPages = Math.ceil(items.length / visible);
+        indicator.innerHTML = Array.from({ length: totalPages }, (_, i) => `
+      <span class="dot${i === 0 ? ' active' : ''}" data-page="${i}"></span>
+    `).join('');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

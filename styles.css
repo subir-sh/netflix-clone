@@ -159,3 +159,26 @@ footer { background: var(--bg); }
 .modal__content a:hover {
   text-decoration: underline;
 }
+
+/* Page indicator */
+.row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.page-indicator {
+  display: flex;
+  gap: 4px;
+}
+
+.page-indicator .dot {
+  width: 12px;
+  height: 4px;
+  background: gray;
+  border-radius: 2px;
+}
+.page-indicator .dot.active {
+  background: lightgray;
+}
