@@ -50,8 +50,7 @@ header {
   color: var(--text);
   cursor: not-allowed; 
 }
-.actions a {
-  color: var(--text);
+.trigger {
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 999px;
@@ -123,3 +122,40 @@ footer { background: var(--bg); }
 .card:focus-within { transform: scale(1.05); }
 .card a { display: block; width: 100%; height: 100%; }
 .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Modal */
+.modal {
+  position: absolute;
+  top: 60px; 
+  transform: translateX(0);
+  min-width: 100px;
+  width: max-content;
+  max-width: 300px;
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.5);
+  display: none;
+  z-index: 1000;
+}
+.modal.show {
+  display: block;
+}
+
+.modal__content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.modal__content li {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.modal__content a {
+  color: var(--text);
+  text-decoration: none;
+}
+.modal__content a:hover {
+  text-decoration: underline;
+}
