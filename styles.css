@@ -151,6 +151,10 @@ footer { background: var(--bg); }
   margin: 0;
   padding: 0;
 }
+.card-container::after {
+  content: "";
+  flex: 0 0 16px; /* gap 크기만큼 */
+}
 
 .card {
   flex: 0 0 calc((100% - (var(--cols) - 1) * 16px) / var(--cols));
@@ -185,8 +189,8 @@ footer { background: var(--bg); }
 }
 
 /* Carousel */
-.carousel { position: relative;}
-.carousel__viewport { overflow: hidden; }
+.carousel { position: relative; }
+.carousel__viewport { overflow: hidden; margin: 0; padding: 0;}
 
 .carousel__nav {
   position: absolute;

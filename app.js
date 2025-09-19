@@ -97,42 +97,61 @@ function initCarousel(section, category) {
     const visible = category.visible;
     const totalCards = category.items.length;
     const totalPages = Math.ceil(totalCards / visible);
+    const cardGap = parseInt(getComputedStyle(track).gap) || 0;
+
+    // seamless loop를 위해 앞뒤로 복제
+    const items = Array.from(track.children);
+    const prepend = items.slice(-visible).map(item => item.cloneNode(true));
+    const append = items.slice(0, visible).map(item => item.cloneNode(true));
+    for (let i = prepend.length - 1; i >= 0; i--) {
+        track.insertBefore(prepend[i], track.firstChild);
+    }
+    append.forEach(item => track.appendChild(item));
 
     let currentPage = 0;
 
-    function update() {
-        const card = track.querySelector('.card');
-        const cardWidth = card.offsetWidth;
-        const cardGap = 16; // 이건 css에서 오는 값이라 그거 읽어서 쓰는 방법이 더 나을 것 같긴 한데 일단...
-        
-        let offset;
-        if (currentPage === totalPages - 1) {
-            // 마지막 페이지: 전체 트랙 너비 - 뷰포트 너비
-            offset = track.scrollWidth - viewport.offsetWidth;
-        } else {
-            // 일반 페이지
-            const startIndex = currentPage * visible;
-            offset = (cardWidth + cardGap) * startIndex;
-        }
+    function update(animate = true) {
+        // 트랙의 마지막에서 처음으로 돌아갈 때는 되감기 트랜지션 없이 이동
+        track.style.transition = animate ? 'transform 0.5s ease' : 'none';
+
+        const offset = (viewport.offsetWidth + cardGap) * (currentPage + 1); // +1: 앞쪽 복제 
         track.style.transform = `translateX(-${offset}px)`;
-        
+
         // 인디케이터 업데이트
         indicator.querySelectorAll('.dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentPage);
         });
     }
 
-    prevBtn.addEventListener('click', () => {
-        currentPage = (currentPage - 1 + totalPages) % totalPages;
-        update();
-    });
-
     nextBtn.addEventListener('click', () => {
-        currentPage = (currentPage + 1) % totalPages;
+        currentPage++;
         update();
+
+        // 복제 카드까지 넘어간 경우
+        if (currentPage >= totalPages) {
+            track.addEventListener('transitionend', () => {
+                track.style.transition = 'none';
+                currentPage = 0; // 첫 페이지로 순간이동
+                update(false);
+            }, { once: true });
+        }
     });
 
-    update(); // 초기 세팅
+    prevBtn.addEventListener('click', () => {
+        currentPage--;
+        update();
+
+        // 복제 카드 전까지 간 경우
+        if (currentPage < 0) {
+            track.addEventListener('transitionend', () => {
+                track.style.transition = 'none';
+                currentPage = totalPages - 1; // 마지막 페이지로 순간이동
+                update(false);
+            }, { once: true });
+        }
+    });
+
+    update(false); // 초기 세팅
 }
 
 document.addEventListener('DOMContentLoaded', () => {

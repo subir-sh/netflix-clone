@@ -32,7 +32,7 @@ function makeCategory(name, title, visible, count) {
 }
 
 export const categoryContent = {
-    action: makeCategory('action', '액션', 6, 20),
-    animation: makeCategory('animation', '애니메이션', 7, 40),
-    thriller: makeCategory('thriller', '스릴러', 5, 35),
+    action: makeCategory('action', '액션', 6, 18),
+    animation: makeCategory('animation', '애니메이션', 7, 35),
+    thriller: makeCategory('thriller', '스릴러', 5, 30),
 };
