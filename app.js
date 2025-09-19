@@ -92,6 +92,7 @@ function initCarousel(section, category) {
     const prevBtn = section.querySelector('.carousel__nav.prev');
     const nextBtn = section.querySelector('.carousel__nav.next');
     const indicator = section.querySelector('.page-indicator');
+    const viewport = section.querySelector('.carousel__viewport');
 
     const visible = category.visible;
     const totalCards = category.items.length;
@@ -103,9 +104,18 @@ function initCarousel(section, category) {
         const card = track.querySelector('.card');
         const cardWidth = card.offsetWidth;
         const cardGap = 16; // 이건 css에서 오는 값이라 그거 읽어서 쓰는 방법이 더 나을 것 같긴 한데 일단...
-        const offset = (cardWidth + cardGap) * (currentPage * visible);
+        
+        let offset;
+        if (currentPage === totalPages - 1) {
+            // 마지막 페이지: 전체 트랙 너비 - 뷰포트 너비
+            offset = track.scrollWidth - viewport.offsetWidth;
+        } else {
+            // 일반 페이지
+            const startIndex = currentPage * visible;
+            offset = (cardWidth + cardGap) * startIndex;
+        }
         track.style.transform = `translateX(-${offset}px)`;
-
+        
         // 인디케이터 업데이트
         indicator.querySelectorAll('.dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentPage);
@@ -113,12 +123,12 @@ function initCarousel(section, category) {
     }
 
     prevBtn.addEventListener('click', () => {
-        currentPage = Math.max(0, currentPage - 1);
+        currentPage = (currentPage - 1 + totalPages) % totalPages;
         update();
     });
 
     nextBtn.addEventListener('click', () => {
-        currentPage = Math.min(totalPages - 1, currentPage + 1);
+        currentPage = (currentPage + 1) % totalPages;
         update();
     });
 
