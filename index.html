@@ -1,13 +1,56 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netflix-clone</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <title>넷플릭스 클론</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/app.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <a class="brand-logo" href="#">Netflix</a>
+
+            <nav class="header-nav">
+                <a href="#">홈</a>
+                <a href="#">시리즈</a>
+                <a href="#">영화</a>
+                <a href="#">게임</a>
+                <a href="#">내 리스트</a>
+            </nav>
+
+            <div class="actions">
+                <button class="search-btn" disabled>검색</button>
+                <button class="trigger" data-type="notif">알림</button>
+                <button class="trigger" data-type="profile">프로필</button>
+            </div>
+
+            <div id="headerModal" class="modal">
+                <div class="modal__content"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <h1>히어로 타이틀</h1>
+            <p>설명 텍스트 공간. 몇 줄 정도 짧은 소개가 들어갈 수 있음.</p>
+            <div class="hero-buttons">
+                <a href="#" class="play-btn">▶ 재생</a>
+                <a href="#" class="info-btn">ⓘ 상세 정보</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="page"></main>
+
+    <footer>
+        <div class="footer-container">
+            <p class="footer-note">넷플릭스 홈페이지 클론</p>
+        </div>
+    </footer>
+</body>
+
 </html>
