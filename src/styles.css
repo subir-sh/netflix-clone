@@ -160,11 +160,39 @@ footer { background: var(--bg); }
   flex: 0 0 calc((100% - (var(--cols) - 1) * 16px) / var(--cols));
   aspect-ratio: 16 / 9;
   border-radius: 8px;
+  position: relative;
 }
 .card:hover { transform: scale(1.05); }
 .card:focus-within { transform: scale(1.05); }
 .card a { display: block; width: 100%; height: 100%; }
 .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.card:hover .like-btn {
+  opacity: 1;
+}
+.like-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  padding: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.like-btn.liked {
+  color: red;
+  transform: scale(1.2);
+}
 
 /* Page indicator */
 .row__header {

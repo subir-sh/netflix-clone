@@ -86,6 +86,7 @@ function renderCategoryRow(key, category) {
               <a href="#">
                 <img src="${img}" alt="${alt}">
               </a>
+              <button class="like-btn">♥</button>
             </li>
           `).join('')}
         </ul>
@@ -172,6 +173,19 @@ function initCarousel(section, category) {
     update(false); // 초기 세팅
 }
 
+function initLikeFeature(section) {
+    section.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+        e.preventDefault();
+        const card = e.target.closest('.card');
+        const id = card.dataset.id;
+
+        // toggle
+        btn.classList.toggle('liked');
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const main = document.querySelector('main.page');
     const { modalContent, categoryContent: rawCategories } = await loadData();
@@ -187,6 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const section = renderCategoryRow(key, category);
         main.appendChild(section);
         initCarousel(section, category);
+        initLikeFeature(section); 
     });
 
     renderHeaderModal(modalContent);
