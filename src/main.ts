@@ -1,23 +1,30 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
+import { renderHeaderModal } from "./modal";
+import { makeCategory, renderCategoryRow } from "./category";
+import { initCarousel } from "./carousel";
+import { initLikeFeature } from "./like";
+import type { DataResponse, Category } from "./types";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+async function loadData(): Promise<DataResponse> {
+    const res = await fetch("/data.json");
+    if (!res.ok) throw new Error("loading failed");
+    return res.json();
+}
 
-//setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+document.addEventListener("DOMContentLoaded", async () => {
+    const main = document.querySelector("main.page") as HTMLElement;
+    const { modalContent, categoryContent: rawCategories } = await loadData();
+
+    const categoryContent: Record<string, Category> = {};
+    Object.entries(rawCategories).forEach(([name, { title, visible, count }]) => {
+        categoryContent[name] = makeCategory(name, title, visible, count);
+    });
+
+    Object.entries(categoryContent).forEach(([key, category]) => {
+        const section = renderCategoryRow(key, category);
+        main.appendChild(section);
+        initCarousel(section, category);
+        initLikeFeature(section);
+    });
+
+    renderHeaderModal(modalContent);
+});
