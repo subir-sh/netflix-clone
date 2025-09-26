@@ -12,14 +12,14 @@ async function loadData(): Promise<DataResponse> {
 
 document.addEventListener("DOMContentLoaded", async () => {
     const main = document.querySelector("main.page") as HTMLElement;
-    const { modalContent, categoryContent: rawCategories } = await loadData();
+    const { modalContent, categoryContent } = await loadData();
 
-    const categoryContent: Record<string, Category> = {};
-    Object.entries(rawCategories).forEach(([name, { title, visible, count }]) => {
-        categoryContent[name] = makeCategory(name, title, visible, count);
+    const categories: Record<string, Category> = {};
+    Object.entries(categoryContent).forEach(([name, { title, visible, count }]) => {
+        categories[name] = makeCategory(name, title, visible, count);
     });
 
-    Object.entries(categoryContent).forEach(([key, category]) => {
+    Object.entries(categories).forEach(([key, category]) => {
         const section = renderCategoryRow(key, category);
         main.appendChild(section);
         initCarousel(section, category);
