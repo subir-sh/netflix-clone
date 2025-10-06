@@ -21,8 +21,5 @@ export interface Category {
 export interface DataResponse {
   modalContent: Record<string, string>;
   categoryContent: Record<string, { genre: string; visible: number }>;
-}
-
-export interface TitleGroups {
-  [key: string]: Title[];
+  titleGroups: Record<string, Title[]>;
 }

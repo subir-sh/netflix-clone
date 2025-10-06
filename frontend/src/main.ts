@@ -2,7 +2,7 @@ import { renderHeaderModal } from "./modal";
 import { makeCategory, renderCategoryRow } from "./category";
 import { initCarousel } from "./carousel";
 import { initLikeFeature } from "./like";
-import type { Category, DataResponse, TitleGroups } from "./types";
+import type { Category, DataResponse } from "./types";
 
 async function loadData<T>(url: string): Promise<T> {
     const res = await fetch(url);
@@ -12,8 +12,7 @@ async function loadData<T>(url: string): Promise<T> {
 
 document.addEventListener("DOMContentLoaded", async () => {
     const main = document.querySelector("main.page") as HTMLElement;
-    const { modalContent, categoryContent } = await loadData<DataResponse>("http://localhost:3001/api/data");
-    const titleGroups = await loadData<TitleGroups>("http://localhost:3001/api/titles");
+    const { modalContent, categoryContent, titleGroups } = await loadData<DataResponse>("http://localhost:3001/api/data");
 
     const categories: Record<string, Category> = {};
     Object.entries(categoryContent).forEach(([name, { genre, visible }]) => {
