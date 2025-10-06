@@ -1,15 +1,11 @@
-import type { Category } from "./types";
-import { TITLES } from "../../backend/data.ts";
+import type { Category, Title } from "./types";
 
 export function makeCategory(
-    name: string,
-    genre: string,
-    visible: number,
-    count: number
+        genre: string,
+        visible: number,
+        titles: Title[]
     ): Category {
-        const filtered = TITLES.filter(t => t.genre === name).slice(0, count);
-
-        const items = filtered.map(t => ({
+        const items = titles.map(t => ({
             id: t.id.toString(),
             title: t.title,
             img: t.image,

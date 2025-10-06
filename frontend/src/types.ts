@@ -1,5 +1,8 @@
-export interface ModalContent {
-  [key: string]: string;
+export interface Title {
+  id: number;
+  title: string;
+  genre: string;
+  image: string;
 }
 
 export interface Item {
@@ -15,13 +18,11 @@ export interface Category {
   items: Item[];
 }
 
-export interface RawCategory {
-  genre: string;
-  visible: number;
-  count: number;
+export interface DataResponse {
+  modalContent: Record<string, string>;
+  categoryContent: Record<string, { genre: string; visible: number }>;
 }
 
-export interface DataResponse {
-  modalContent: ModalContent;
-  categoryContent: { [key: string]: RawCategory };
+export interface TitleGroups {
+  [key: string]: Title[];
 }

@@ -1,3 +1,38 @@
+export const DATA = {
+  modalContent: {
+    notif: `
+      <ul>
+        <li><a href='#'>새로운 에피소드 등장</a></li>
+        <li><a href='#'>내가 찜한 콘텐츠 업데이트</a></li>
+        <li><a href='#'>오늘 저녁 8시 공개 예정</a></li>
+      </ul>
+    `,
+    profile: `
+      <ul>
+        <li><a href='#'>계정</a></li>
+        <li><a href='#'>설정</a></li>
+        <li><a href='#'>고객 센터</a></li>
+        <li><a href='#'>로그아웃</a></li>
+      </ul>
+    `,
+  },
+
+  categoryContent: {
+    action: {
+      genre: "액션",
+      visible: 6,
+    },
+    animation: {
+      genre: "애니메이션",
+      visible: 7,
+    },
+    thriller: {
+      genre: "스릴러",
+      visible: 5,
+    },
+  },
+};
+
 export const TITLES = [
   // 액션 (18)
   { id: 1, title: "Extraction 2", genre: "action", image: "https://image.tmdb.org/t/p/w200/7gKI9hpEMcZUQpNgKrkDzJpbnNS.jpg" },

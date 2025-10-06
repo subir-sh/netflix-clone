@@ -2,21 +2,23 @@ import { renderHeaderModal } from "./modal";
 import { makeCategory, renderCategoryRow } from "./category";
 import { initCarousel } from "./carousel";
 import { initLikeFeature } from "./like";
-import type { DataResponse, Category } from "./types";
+import type { Category, DataResponse, TitleGroups } from "./types";
 
-async function loadData(): Promise<DataResponse> {
-    const res = await fetch("/data.json");
-    if (!res.ok) throw new Error("loading failed");
+async function loadData<T>(url: string): Promise<T> {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`loading failed from ${url}`);
     return res.json();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
     const main = document.querySelector("main.page") as HTMLElement;
-    const { modalContent, categoryContent } = await loadData();
+    const { modalContent, categoryContent } = await loadData<DataResponse>("http://localhost:3001/api/data");
+    const titleGroups = await loadData<TitleGroups>("http://localhost:3001/api/titles");
 
     const categories: Record<string, Category> = {};
-    Object.entries(categoryContent).forEach(([name, { genre, visible, count }]) => {
-        categories[name] = makeCategory(name, genre, visible, count);
+    Object.entries(categoryContent).forEach(([name, { genre, visible }]) => {
+        const titles = titleGroups[name] || [];
+        categories[name] = makeCategory(genre, visible, titles);
     });
 
     Object.entries(categories).forEach(([key, category]) => {
