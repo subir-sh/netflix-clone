@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { modalContent, categoryContent } = await loadData();
 
     const categories: Record<string, Category> = {};
-    Object.entries(categoryContent).forEach(([name, { title, visible, count }]) => {
-        categories[name] = makeCategory(name, title, visible, count);
+    Object.entries(categoryContent).forEach(([name, { genre, visible, count }]) => {
+        categories[name] = makeCategory(name, genre, visible, count);
     });
 
     Object.entries(categories).forEach(([key, category]) => {

@@ -5,17 +5,17 @@
     },
     "categoryContent": {
         "action": {
-            "title": "액션",
+            "genre": "액션",
             "visible": 6,
             "count": 18
         },
         "animation": {
-            "title": "애니메이션",
+            "genre": "애니메이션",
             "visible": 7,
             "count": 35
         },
         "thriller": {
-            "title": "스릴러",
+            "genre": "스릴러",
             "visible": 5,
             "count": 30
         }

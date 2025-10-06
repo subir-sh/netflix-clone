@@ -10,13 +10,13 @@ export interface Item {
 }
 
 export interface Category {
-  title: string;
+  genre: string;
   visible: number;
   items: Item[];
 }
 
 export interface RawCategory {
-  title: string;
+  genre: string;
   visible: number;
   count: number;
 }
