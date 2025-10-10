@@ -260,3 +260,20 @@ footer { background: var(--bg); }
   padding: 24px 60px;
   overflow-y: auto;
 }
+
+#searchInput {
+  width: 0;
+  opacity: 0;
+  padding: 6px 10px;
+  border: 1px solid gray;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.search-bar.active #searchInput {
+  width: 200px;
+  opacity: 1;
+  background: var(--bg);
+}
