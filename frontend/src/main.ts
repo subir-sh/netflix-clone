@@ -2,6 +2,7 @@ import { renderHeaderModal } from "./modal";
 import { makeCategory, renderCategoryRow } from "./category";
 import { initCarousel } from "./carousel";
 import { initLikeFeature } from "./like";
+import { initSearch } from "./search";
 import type { Category, DataResponse } from "./types";
 
 async function loadData<T>(url: string): Promise<T> {
@@ -27,5 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         initLikeFeature(section);
     });
 
+    initSearch();
     renderHeaderModal(modalContent);
 });

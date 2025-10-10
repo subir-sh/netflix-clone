@@ -22,6 +22,25 @@ app.get("/api/data", (req, res) => {
   });
 });
 
+app.get("/api/search", async (req, res) => {
+  const q = (req.query.q || "").toLowerCase().trim();
+
+  // 빈 검색어 -> 빈 결과
+  if (!q) return res.json({ items: [], total: 0 });
+
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // 1초 지연
+
+  // 제목에 검색어가 포함된 아이템만 필터링
+  const result = TITLES.filter((t) =>
+    t.title.toLowerCase().includes(q)
+  );
+
+  res.json({
+    items: result,
+    total: result.length,
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server on http://localhost:${PORT}`);
 });

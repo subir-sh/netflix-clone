@@ -20,9 +20,12 @@
                 <a href="#">게임</a>
                 <a href="#">내 리스트</a>
             </nav>
-
+            
             <div class="actions">
-                <button class="search-btn" disabled>검색</button>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="검색" />
+                    <button class="search-btn" id="searchBtn">검색</button>
+                </div>
                 <button class="trigger" data-type="notif">알림</button>
                 <button class="trigger" data-type="profile">프로필</button>
             </div>
@@ -30,8 +33,14 @@
             <div id="headerModal" class="modal">
                 <div class="modal__content"></div>
             </div>
+            
         </div>
     </header>
+
+    <div class="search-layer">
+        <div class="search-suggestions"></div>
+        <div class="search-grid"></div>
+    </div>
 
     <section class="hero">
         <div class="hero-container">
