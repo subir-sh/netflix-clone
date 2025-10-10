@@ -43,18 +43,18 @@ export function initSearch() {
 
     // 검색창 입력
     input.addEventListener("input", () => {
-        const q = input.value.trim();
+        const query = input.value.trim();
 
         if (debounceTimer) clearTimeout(debounceTimer);
 
-        if (!q) {
+        if (!query) {
             exitSearchMode(layer, grid, hero, main, input);
             return;
         }
 
         debounceTimer = window.setTimeout(async () => {
             try {
-                const res = await fetch(`http://localhost:3001/api/search?q=${encodeURIComponent(q)}`);
+                const res = await fetch(`http://localhost:3001/api/search?q=${encodeURIComponent(query)}`);
                 if (!res.ok) throw new Error("검색 실패");
 
                 const data = await res.json();
@@ -64,11 +64,11 @@ export function initSearch() {
                 } else {
                     grid.innerHTML = data.items
                         .map(
-                            (i: any) => `
-              <div class="card">
-                <img src="${i.image}" alt="${i.title}" />
-                <p>${i.title}</p>
-              </div>`
+                            (item: any) => `
+                                <div class="card">
+                                    <img src="${item.image}" alt="${item.title}" />
+                                    <p>${item.title}</p>
+                                </div>`
                         )
                         .join("");
                 }
